@@ -10,16 +10,47 @@ import { Session } from '@supabase/supabase-js';
 
 import { supabase } from './lib/supabase';
 import LoadingScreen from './components/LoadingScreen';
+
+// Core Pages
 import AuthScreen from './screens/AuthScreen';
+import IndexScreen from './screens/IndexScreen';
 import HomeScreen from './screens/HomeScreen';
+
+// Location & Activities
 import MapScreen from './screens/MapScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import ChatScreen from './screens/ChatScreen';
 import MeetUpScreen from './screens/MeetUpScreen';
+import ActivityScreen from './screens/ActivityScreen';
+import ActivityDetailScreen from './screens/ActivityDetailScreen';
+
+// Services & Marketplace
 import HireScreen from './screens/HireScreen';
+import GigsScreen from './screens/GigsScreen';
+import GigDetailScreen from './screens/GigDetailScreen';
+import ProviderDashboardScreen from './screens/ProviderDashboardScreen';
+import BookingsScreen from './screens/BookingsScreen';
+
+// Communication
+import ChatScreen from './screens/ChatScreen';
+import SimpleChatScreen from './screens/SimpleChatScreen';
+import ChatTestScreen from './screens/ChatTestScreen';
+
+// User Management
+import ProfileScreen from './screens/ProfileScreen';
+import NetworkScreen from './screens/NetworkScreen';
+
+// Settings & Configuration
 import SettingsScreen from './screens/SettingsScreen';
+import NotificationSettingsScreen from './screens/NotificationSettingsScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
+
+// Financial
 import WalletScreen from './screens/WalletScreen';
+import SubscriptionScreen from './screens/SubscriptionScreen';
+import EarnScreen from './screens/EarnScreen';
+
+// Administrative
+import AdminScreen from './screens/AdminScreen';
+import HelpScreen from './screens/HelpScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,12 +60,22 @@ const linking = {
   prefixes: [Linking.createURL('/'), 'buddysurf://'],
   config: {
     screens: {
+      Index: '',
       Main: {
         screens: {
           HomeTab: {
             screens: {
-              Home: '',
+              Home: 'home',
               Profile: 'profile/:userId?',
+              Settings: 'settings',
+              NotificationSettings: 'notification-settings',
+              Notifications: 'notifications',
+              Wallet: 'wallet',
+              Subscription: 'subscription',
+              Earn: 'earn',
+              Network: 'network',
+              Help: 'help',
+              Admin: 'admin',
             },
           },
           MapTab: {
@@ -42,14 +83,27 @@ const linking = {
               Map: 'map',
             },
           },
+          ActivityTab: {
+            screens: {
+              Activity: 'activity',
+              ActivityDetail: 'activity/:id',
+              MeetUp: 'meetup',
+            },
+          },
+          HireTab: {
+            screens: {
+              Hire: 'hire',
+              Gigs: 'gigs',
+              GigDetail: 'gig/:id',
+              ProviderDashboard: 'provider-dashboard',
+              Bookings: 'bookings',
+            },
+          },
           ChatTab: {
             screens: {
               Chat: 'chat/:conversationId?',
-            },
-          },
-          MeetUpTab: {
-            screens: {
-              MeetUp: 'meetup',
+              SimpleChat: 'simple-chat',
+              ChatTest: 'chat-test',
             },
           },
         },
@@ -65,15 +119,17 @@ function TabNavigator() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName: keyof typeof Ionicons.glyphMap;
-          
+
           if (route.name === 'HomeTab') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'MapTab') {
             iconName = focused ? 'map' : 'map-outline';
+          } else if (route.name === 'ActivityTab') {
+            iconName = focused ? 'calendar' : 'calendar-outline';
+          } else if (route.name === 'HireTab') {
+            iconName = focused ? 'briefcase' : 'briefcase-outline';
           } else if (route.name === 'ChatTab') {
             iconName = focused ? 'chatbubble' : 'chatbubble-outline';
-          } else if (route.name === 'MeetUpTab') {
-            iconName = focused ? 'people' : 'people-outline';
           } else {
             iconName = focused ? 'person' : 'person-outline';
           }
@@ -83,27 +139,40 @@ function TabNavigator() {
         tabBarActiveTintColor: '#22c55e',
         tabBarInactiveTintColor: 'gray',
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: 'white',
+          borderTopWidth: 1,
+          borderTopColor: '#e5e7eb',
+          paddingBottom: 5,
+          paddingTop: 5,
+          height: 60,
+        },
       })}
     >
-      <Tab.Screen 
-        name="HomeTab" 
-        component={HomeStackNavigator} 
+      <Tab.Screen
+        name="HomeTab"
+        component={HomeStackNavigator}
         options={{ title: 'Home' }}
       />
-      <Tab.Screen 
-        name="MapTab" 
-        component={MapStackNavigator} 
+      <Tab.Screen
+        name="MapTab"
+        component={MapStackNavigator}
         options={{ title: 'Map' }}
       />
-      <Tab.Screen 
-        name="ChatTab" 
-        component={ChatStackNavigator} 
-        options={{ title: 'Chat' }}
+      <Tab.Screen
+        name="ActivityTab"
+        component={ActivityStackNavigator}
+        options={{ title: 'Activities' }}
       />
-      <Tab.Screen 
-        name="MeetUpTab" 
-        component={MeetUpStackNavigator} 
-        options={{ title: 'MeetUp' }}
+      <Tab.Screen
+        name="HireTab"
+        component={HireStackNavigator}
+        options={{ title: 'Hire' }}
+      />
+      <Tab.Screen
+        name="ChatTab"
+        component={ChatStackNavigator}
+        options={{ title: 'Chat' }}
       />
     </Tab.Navigator>
   );
