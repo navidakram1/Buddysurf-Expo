@@ -180,37 +180,58 @@ function TabNavigator() {
 
 function HomeStackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen name="NotificationSettings" component={NotificationSettingsScreen} />
       <Stack.Screen name="Notifications" component={NotificationsScreen} />
       <Stack.Screen name="Wallet" component={WalletScreen} />
+      <Stack.Screen name="Subscription" component={SubscriptionScreen} />
+      <Stack.Screen name="Earn" component={EarnScreen} />
+      <Stack.Screen name="Network" component={NetworkScreen} />
+      <Stack.Screen name="Help" component={HelpScreen} />
+      <Stack.Screen name="Admin" component={AdminScreen} />
     </Stack.Navigator>
   );
 }
 
 function MapStackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Map" component={MapScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function ActivityStackNavigator() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Activity" component={ActivityScreen} />
+      <Stack.Screen name="ActivityDetail" component={ActivityDetailScreen} />
+      <Stack.Screen name="MeetUp" component={MeetUpScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function HireStackNavigator() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Hire" component={HireScreen} />
+      <Stack.Screen name="Gigs" component={GigsScreen} />
+      <Stack.Screen name="GigDetail" component={GigDetailScreen} />
+      <Stack.Screen name="ProviderDashboard" component={ProviderDashboardScreen} />
+      <Stack.Screen name="Bookings" component={BookingsScreen} />
     </Stack.Navigator>
   );
 }
 
 function ChatStackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Chat" component={ChatScreen} />
-    </Stack.Navigator>
-  );
-}
-
-function MeetUpStackNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="MeetUp" component={MeetUpScreen} />
-      <Stack.Screen name="Hire" component={HireScreen} />
+      <Stack.Screen name="SimpleChat" component={SimpleChatScreen} />
+      <Stack.Screen name="ChatTest" component={ChatTestScreen} />
     </Stack.Navigator>
   );
 }
@@ -246,7 +267,10 @@ export default function App() {
           {session ? (
             <Stack.Screen name="Main" component={TabNavigator} />
           ) : (
-            <Stack.Screen name="Auth" component={AuthScreen} />
+            <>
+              <Stack.Screen name="Index" component={IndexScreen} />
+              <Stack.Screen name="Auth" component={AuthScreen} />
+            </>
           )}
         </Stack.Navigator>
       </NavigationContainer>
