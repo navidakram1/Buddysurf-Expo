@@ -196,9 +196,9 @@ export const gigsService = {
     let totalAmount = gig.base_price;
 
     if (bookingData.package_id) {
-      const package = gig.gig_packages?.find(p => p.id === bookingData.package_id);
-      if (package) {
-        totalAmount = package.price;
+      const selectedPackage = gig.gig_packages?.find(p => p.id === bookingData.package_id);
+      if (selectedPackage) {
+        totalAmount = selectedPackage.price;
       }
     }
 

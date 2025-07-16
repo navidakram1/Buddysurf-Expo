@@ -3,7 +3,7 @@
     "name": "BuddySurf",
     "slug": "buddysurf-expo",
     "version": "1.0.0",
-    "sdkVersion": "53.0.0",
+    "sdkVersion": "52.0.0",
     "platforms": [
       "ios",
       "android",
@@ -48,7 +48,8 @@
         {
           "photosPermission": "Allow BuddySurf to access your photos to share with other users."
         }
-      ]
+      ],
+      "expo-font"
     ],
     "extra": {
       "eas": {
